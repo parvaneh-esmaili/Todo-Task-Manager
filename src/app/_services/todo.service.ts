@@ -6,24 +6,23 @@ import { TodoForListModel, TodoForSaveModel } from '../_models/todo.model';
 @Injectable({
   providedIn: 'root'
 })
-
 export class TodoService {
-  getTodos() {
-    throw new Error('Method not implemented.');
-  }
-  private apiUrl = ''
+  private apiUrl = 'http://localhost:1337/api/todo-task-managers';
 
-  constructor( private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getNotes(): Observable<TodoForListModel[]>{
-    return this.http.get<TodoForListModel[]>(this.apiUrl);
-  };
-
-  addNotes(newNote: TodoForSaveModel): Observable<TodoForListModel> {
-    return this.http.post<TodoForSaveModel> (this.apiUrl,newNote);
+  // گرفتن لیست تودوها
+  getNotes(): Observable<TodoForListModel[]> {
+    return this.http.get<TodoForListModel[]>(this.apiUrl); 
   }
 
+  // اضافه کردن یک تودو
+  addNote(newNote: TodoForSaveModel): Observable<TodoForListModel> {
+    return this.http.post<TodoForListModel>(this.apiUrl, newNote);
+  }
+
+  // حذف یک تودو
   deleteNote(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`); 
   }
 }

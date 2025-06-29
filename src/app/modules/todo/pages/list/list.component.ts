@@ -1,36 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoForListModel } from '../../../../_models/todo.model';
 import { TodoService } from '../../../../_services/todo.service';
-import { NgFor } from '@angular/common';
-
+import { CommonModule, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { map } from 'rxjs/operators'; 
 @Component({
   selector: 'app-list',
-  imports: [NgFor],
+  standalone: true,
+  imports: [NgFor, FormsModule, CommonModule],
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  styleUrl: './list.component.css'
 })
 export class ListComponent implements OnInit {
   todos: TodoForListModel[] = [];
-  selectId: number | null = null;
+  selectedId: number | null = null;
   today: Date = new Date();
 
   constructor(private todoService: TodoService) {}
 
-  ngOnInit(): void {
-    this.getNotes();
-  }
-
-  getNotes(): void {
-    this.todoService.getNotes().subscribe((data: TodoForListModel[]) => {
+  ngOnInit() {
+    this.todoService.getNotes().pipe(
+      map(data => data || [])  
+    ).subscribe(data => {
       this.todos = data;
     });
   }
 
-  deleteNote(id: number): void {
+  deleteNote(id: number) {
     this.todoService.deleteNote(id).subscribe(() => {
-      const index = this.todos.findIndex(x => x.todo.id === id);
-          this.todos.splice(index, 1);
-
+      this.todos = this.todos.filter(todo => todo.id !== id);
     });
   }
 }
