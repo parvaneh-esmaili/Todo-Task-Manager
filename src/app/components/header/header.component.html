@@ -1,1 +1,9 @@
-<p>header works!</p>
+<div class="h-16 bg-blue-500 border-b flex items-center justify-between px-4">
+    <p class="font-semibold text-white p-3 m-1 text-xl">Todo Task Manager</p>
+    <div class="flex gap-2 text-center">
+        <div *ngFor="let items of menu" 
+        class="p-1 font-semibold text-lg border bg-blue-500 w-16 h-10 rounded-md text-white hover:bg-blue-50 hover:text-blue-800 duration-300 active:scale-95">
+        <a [routerLink]="items.url" routerLinkActive="border-b-2 border-white">{{ items.item }}</a>
+    </div>
+  </div>
+</div>

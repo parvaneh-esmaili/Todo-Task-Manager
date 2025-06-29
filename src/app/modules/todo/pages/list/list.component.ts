@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoForListModel } from '../../../../_models/todo.model';
 import { TodoService } from '../../../../_services/todo.service';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-list',
+  imports: [NgFor],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
@@ -27,7 +29,8 @@ export class ListComponent implements OnInit {
   deleteNote(id: number): void {
     this.todoService.deleteNote(id).subscribe(() => {
       const index = this.todos.findIndex(x => x.todo.id === id);
-       this.todos.splice(index, 1);
+          this.todos.splice(index, 1);
+
     });
   }
 }
