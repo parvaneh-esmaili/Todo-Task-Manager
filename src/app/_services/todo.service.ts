@@ -11,17 +11,14 @@ export class TodoService {
 
   constructor(private http: HttpClient) { }
 
-  // گرفتن لیست تودوها
   getNotes(): Observable<TodoForListModel[]> {
     return this.http.get<TodoForListModel[]>(this.apiUrl); 
   }
 
-  // اضافه کردن یک تودو
   addNote(newNote: TodoForSaveModel): Observable<TodoForListModel> {
     return this.http.post<TodoForListModel>(this.apiUrl, newNote);
   }
 
-  // حذف یک تودو
   deleteNote(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`); 
   }
