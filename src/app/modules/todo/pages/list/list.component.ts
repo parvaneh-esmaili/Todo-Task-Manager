@@ -3,13 +3,14 @@ import { TodoForListModel } from '../../../../_models/todo.model';
 import { TodoService } from '../../../../_services/todo.service';
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { map } from 'rxjs/operators'; 
+
+
 @Component({
   selector: 'app-list',
   standalone: true,
   imports: [NgFor, FormsModule, CommonModule],
   templateUrl: './list.component.html',
-  styleUrl: './list.component.css'
+  styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
   todos: TodoForListModel[] = [];
@@ -19,10 +20,8 @@ export class ListComponent implements OnInit {
   constructor(private todoService: TodoService) {}
 
   ngOnInit() {
-    this.todoService.getNotes().pipe(
-      map(data => data || [])  
-    ).subscribe(data => {
-      this.todos = data;
+    this.todoService.getNotes().subscribe(data => {
+      this.todos = data; 
     });
   }
 
