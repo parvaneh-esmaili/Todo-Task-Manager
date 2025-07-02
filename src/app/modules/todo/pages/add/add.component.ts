@@ -26,7 +26,6 @@ export class AddComponent implements OnInit {
   }
 
   saveTodo() {
-
     this.todoService.addNote(this.newTodo).subscribe(
       (addedTodo) => {
         this.todos.push(addedTodo); 

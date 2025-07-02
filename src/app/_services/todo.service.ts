@@ -7,7 +7,7 @@ import { TodoForListModel, TodoForSaveModel } from '../_models/todo.model';
   providedIn: 'root'
 })
 export class TodoService {
-  private apiUrl = 'http://localhost:1337/api/todo-task-managers';  
+  private apiUrl = 'http://localhost:1337/api/todos';  
 
   constructor(private http: HttpClient) { }
   getNotes(): Observable<TodoForListModel[]> {

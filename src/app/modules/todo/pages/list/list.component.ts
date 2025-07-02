@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-list',
   standalone: true,
   imports: [NgFor, FormsModule, CommonModule],
-  templateUrl: './list.component.html',
+  templateUrl:  './list.component.html',
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
@@ -26,8 +26,9 @@ export class ListComponent implements OnInit {
   }
 
   deleteNote(id: number) {
-    this.todoService.deleteNote(id).subscribe(() => {
-      this.todos = this.todos.filter(todo => todo.id !== id);
-    });
-  }
+  console.log('Deleting ID:', id); 
+  this.todoService.deleteNote(id).subscribe(() => {
+    this.todos = this.todos.filter(todo => todo.id !== id);
+  });
+}
 }
