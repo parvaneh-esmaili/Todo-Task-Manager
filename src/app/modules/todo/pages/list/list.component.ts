@@ -13,22 +13,21 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+
   todos: TodoForListModel[] = [];
-  selectedId: number | null = null;
   today: Date = new Date();
 
   constructor(private todoService: TodoService) {}
 
   ngOnInit() {
     this.todoService.getNotes().subscribe(data => {
-      this.todos = data; 
+    this.todos = data; 
     });
   }
 
-  deleteNote(id: number) {
-  console.log('Deleting ID:', id); 
-  this.todoService.deleteNote(id).subscribe(() => {
-    this.todos = this.todos.filter(todo => todo.id !== id);
+  deleteNote( documentId: string) { 
+    this.todoService.deleteNote( documentId).subscribe(() => {
+    this.todos = this.todos.filter(todo => todo.documentId !==  documentId);
   });
 }
 }
