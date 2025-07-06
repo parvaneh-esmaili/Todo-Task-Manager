@@ -19,6 +19,7 @@ export class TodoService {
 
 
   addNote(newTodo: TodoForSaveModel): Observable<TodoForListModel> {
+    console.log(newTodo)
   return this.http.post<{ data: TodoForListModel }>(this.apiUrl, { data: newTodo }).pipe(
     map(response => response.data)
   );

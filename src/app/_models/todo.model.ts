@@ -6,17 +6,23 @@ export interface TodoForListModel {
 }
 
 export class TodoForSaveModel {
-  id: number;
+  // id: number;
   title: string;
   description?: string;
   date: string;
-  documentId: string;  
+  // documentId: string;  
 
-  constructor(id: number = 0, title: string = '', description: string = '', date: string = new Date().toISOString(), documentId: string = '') {
-    this.id = id;
+  constructor(
+    // id: number = 0,
+    title: string = '',
+    description: string = '',
+    date: string = new Date().toISOString(),
+    // documentId: string = ''
+  ) {
+    // this.id = id;
     this.title = title;
     this.description = description;
     this.date = date;
-    this.documentId = documentId; 
+    // this.documentId = documentId; 
   }
 }
