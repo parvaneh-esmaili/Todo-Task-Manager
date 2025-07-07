@@ -37,12 +37,12 @@ export class TodoService {
     );
   }
 
-  editNote(newTodo: TodoForListModel): Observable<TodoForListModel> {
+  editNote(todoForUpdate: TodoForListModel): Observable<TodoForListModel> {
     const todo = {
-    title: newTodo.title,
-    description: newTodo.description,
+    title: todoForUpdate.title,
+    description: todoForUpdate.description,
     };
    return this.http.put<{ data: TodoForListModel }>(
-    `${this.apiUrl}/${newTodo.documentId}`, { data: todo }).pipe(map(res => res.data));
+    `${this.apiUrl}/${todoForUpdate.documentId}`, { data: todo }).pipe(map(res => res.data));
    }
 }
