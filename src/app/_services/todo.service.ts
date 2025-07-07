@@ -16,17 +16,25 @@ export class TodoService {
       map(response => response.data || [])  
     );
   }
-
-
+  
   addNote(newTodo: TodoForSaveModel): Observable<TodoForListModel> {
-  return this.http.post<{ data: TodoForListModel }>(this.apiUrl, { data: newTodo }).pipe(
+    console.log(newTodo)
+    return this.http.post<{ data: TodoForListModel }>(this.apiUrl, { data: newTodo }).pipe(
     map(response => response.data)
-  );
-}
-
-
+    );
+  }
 
   deleteNote(documentId: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${documentId}`);
+  }
+
+  getNoteByDocumentId(documentId: string):Observable<{data: TodoForListModel}> {
+    return this.http.get<{data: TodoForListModel}>(`${this.apiUrl}/${documentId}`);
+  }
+
+  editNote(newTodo: TodoForListModel):Observable<any> {
+    return this.http.put<{data: TodoForListModel}>(this.apiUrl, { data: newTodo }).pipe(
+    map(response => response.data)
+    );
   }
 }

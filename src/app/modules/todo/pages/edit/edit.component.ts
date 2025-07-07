@@ -1,0 +1,41 @@
+import { Component, OnInit } from '@angular/core';
+import {
+  TodoForListModel,
+} from '../../../../_models/todo.model';
+import { TodoService } from '../../../../_services/todo.service';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-edit',
+  imports: [FormsModule],
+  templateUrl: './edit.component.html',
+  styleUrl: './edit.component.css',
+})
+export class EditComponent implements OnInit {
+  todoForUpdate: TodoForListModel = new TodoForListModel();
+
+  documentId: string = '';
+
+  constructor(
+    private todoService: TodoService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.documentId = this.route.snapshot.paramMap.get('documentId')!;
+    this.todoService.getNoteByDocumentId(this.documentId).subscribe((x) => {
+      console.log(x.data);
+      this.todoForUpdate = x.data;
+    });
+  }
+
+  editNote(todo: TodoForListModel): any {
+    this.todoService.getNoteByDocumentId;
+    this.todoService.editNote(todo).subscribe(() => {
+      console.log('done');
+    });
+  }
+
+  saveNote() {}
+}
