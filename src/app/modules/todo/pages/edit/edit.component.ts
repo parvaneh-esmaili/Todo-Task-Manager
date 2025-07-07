@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  TodoForListModel,
-} from '../../../../_models/todo.model';
+import { TodoForListModel } from '../../../../_models/todo.model';
 import { TodoService } from '../../../../_services/todo.service';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -30,12 +28,9 @@ export class EditComponent implements OnInit {
     });
   }
 
-  editNote(todo: TodoForListModel): any {
-    this.todoService.getNoteByDocumentId;
-    this.todoService.editNote(todo).subscribe(() => {
+   editTodo() {
+    this.todoService.editNote(this.todoForUpdate).subscribe(() => {
       console.log('done');
     });
   }
-
-  saveNote() {}
 }

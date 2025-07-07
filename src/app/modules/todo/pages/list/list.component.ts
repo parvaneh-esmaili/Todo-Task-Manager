@@ -13,21 +13,21 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent implements OnInit {
-  todos: TodoForListModel[] = [];
+  todo: TodoForListModel[] = [];
   today: Date = new Date();
 
   constructor(private todoService: TodoService) {}
 
   ngOnInit() {
     this.todoService.getNotes().subscribe((data) => {
-      this.todos = data;
-      console.log(this.todos);
+      this.todo = data;
+      console.log(this.todo);
     });
   }
 
   deleteNote(documentId: string) {
     this.todoService.deleteNote(documentId).subscribe(() => {
-      this.todos = this.todos.filter((todo) => todo.documentId !== documentId);
+      this.todo = this.todo.filter((todo) => todo.documentId !== documentId);
     });
   }
 }
