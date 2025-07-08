@@ -11,7 +11,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class HeaderComponent {
     menu = [
     { item: 'List', url: './list' },
-    { item: 'Add', url: './add' }
+    { item: 'Add', url: './add' },
+    { item: 'Log In', url: './login' },
   ];
 
 }

@@ -8,7 +8,6 @@ export class TodoForListModel {
 }
 
 export class TodoForSaveModel {
-  
   title: string;
   description?: string;
   date: string;

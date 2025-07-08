@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { TodoForListModel } from '../../../../_models/todo.model';
 import { TodoService } from '../../../../_services/todo.service';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
@@ -12,12 +12,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditComponent implements OnInit {
   todoForUpdate: TodoForListModel = new TodoForListModel();
-
   documentId: string = '';
 
   constructor(
     private todoService: TodoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -28,9 +28,10 @@ export class EditComponent implements OnInit {
     });
   }
 
-   editTodo() {
+  editTodo() {
     this.todoService.editNote(this.todoForUpdate).subscribe(() => {
       console.log('done');
+      this.router.navigate(['/list']);
     });
   }
 }
