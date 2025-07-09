@@ -11,7 +11,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './edit.component.css',
 })
 export class EditComponent implements OnInit {
-  todoForUpdate: TodoForListModel = new TodoForListModel();
+  todoForUpdate: TodoForListModel = new TodoForListModel(0, '', '', '', [
+    {
+      id: 0,
+    },
+  ]);
   documentId: string = '';
 
   constructor(

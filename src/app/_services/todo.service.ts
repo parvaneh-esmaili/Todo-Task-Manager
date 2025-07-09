@@ -13,7 +13,7 @@ export class TodoService {
 
   getNotes(): Observable<TodoForListModel[]> {
     return this.http
-      .get<{ data: TodoForListModel[] }>(this.apiUrl)
+      .get<{ data: TodoForListModel[] }>(this.apiUrl + '?populate=*')
       .pipe(map((response) => response.data || []));
   }
 
@@ -39,10 +39,14 @@ export class TodoService {
 
   editNote(todoForUpdate: TodoForListModel): Observable<TodoForListModel> {
     const todo = {
-    title: todoForUpdate.title,
-    description: todoForUpdate.description,
+      title: todoForUpdate.title,
+      description: todoForUpdate.description,
     };
-   return this.http.put<{ data: TodoForListModel }>(
-    `${this.apiUrl}/${todoForUpdate.documentId}`, { data: todo }).pipe(map(res => res.data));
-   }
+    return this.http
+      .put<{ data: TodoForListModel }>(
+        `${this.apiUrl}/${todoForUpdate.documentId}`,
+        { data: todo }
+      )
+      .pipe(map((res) => res.data));
+  }
 }

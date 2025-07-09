@@ -3,7 +3,12 @@ export class TodoForListModel {
     public id: number = 0,
     public title: string = '',
     public description: string = '',
-    public documentId: string = ''
+    public documentId: string = '',
+    public todos: [
+      {
+        id: number;
+      }
+    ]
   ) {}
 }
 
@@ -16,13 +21,13 @@ export class TodoForSaveModel {
     // id: number = 0,
     title: string = '',
     description: string = '',
-    date: string = new Date().toISOString(),
+    date: string = new Date().toISOString()
     // documentId: string = ''
   ) {
     // this.id = id;
     this.title = title;
     this.description = description;
     this.date = date;
-    // this.documentId = documentId; 
+    // this.documentId = documentId;
   }
 }

@@ -8,6 +8,7 @@ import {
   FormGroup,
   FormControl,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -21,21 +22,22 @@ export class LogInComponent {
     password: new FormControl('', [Validators.required]),
   });
 
-  newUser:  {
+  newUser: {
     identifier: string;
     password: string;
   } = {
-    identifier:this.loginForm.controls['username'].value,
-    password: this.loginForm.controls['password'].value
-  }
-      
-  
+    identifier: this.loginForm.controls['username'].value,
+    password: this.loginForm.controls['password'].value,
+  };
 
-  constructor(private logInService: LogInService) {}
+  constructor(private logInService: LogInService, private router: Router) {}
 
   LogIn() {
-    this.logInService.getLogIn(this.newUser).subscribe(() => {
-      console.log('new user added');
+    this.logInService.getLogIn(this.newUser).subscribe((resposnse) => {
+      const token = resposnse.jwt;
+      this.logInService.saveToken(token);
+      localStorage.setItem('userID', resposnse.user.id.toString());
+      this.router.navigate(['/list']);
     });
   }
 }

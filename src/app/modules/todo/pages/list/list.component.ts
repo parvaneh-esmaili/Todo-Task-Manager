@@ -20,8 +20,12 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.todoService.getNotes().subscribe((data) => {
-      this.todo = data;
-      console.log(this.todo);
+      const userId = localStorage.getItem('userID');
+      data.forEach((todo) => {
+        if (todo.todos[0].id.toString() == userId) {
+          this.todo.push(todo);
+        }
+      });
     });
   }
 
